@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -96,20 +97,19 @@ namespace Trabalho_pratico
 
             return false;
         }
-    
-        public void ExibirCartela()
+
+        public void ExibirCartela(StreamWriter writer)
         {
             for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < 5; j++)
                 {
-                    Console.Write($"{cartelas[i, j],3} ");
-                    
+                    writer.Write($"{cartelas[i, j],3} ");
                 }
-                Console.WriteLine();
+                writer.WriteLine();
             }
-
         }
+
 
     }
 }

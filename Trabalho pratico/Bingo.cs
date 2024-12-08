@@ -55,9 +55,7 @@ namespace Trabalho_pratico
                         Console.WriteLine($"{jogador.nome} fez Bingo!");                        
                     }
                 }
-            }
-
-            Console.WriteLine("Nenhum jogador fez Bingo.");
+            }            
         }
         public void ExibirNumerosSorteados()
         {

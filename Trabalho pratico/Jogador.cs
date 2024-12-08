@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -74,15 +75,16 @@ namespace Trabalho_pratico
             }
             return true; 
         }
-        public void ExibirInformacoes()
+       public void ExibirInformacoes(StreamWriter writer)
         {
-            Console.WriteLine("Nome:" + nome);
-            Console.WriteLine("Cartelas do jogador:");
+            writer.WriteLine($"Nome: {nome}");
+            writer.WriteLine("Cartelas do jogador:");
             for (int i = 0; i < cartelas.Length; i++)
             {
-                Console.WriteLine($"\nCartela {i + 1}:");
-                cartelas[i].ExibirCartela();
+                writer.WriteLine($"\nCartela {i + 1}:");
+                cartelas[i].ExibirCartela(writer);
             }
         }
+
     }
 }
