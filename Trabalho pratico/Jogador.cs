@@ -31,7 +31,7 @@ namespace Trabalho_pratico
                     
                     for (int j = 0; j < i; j++) 
                     {
-                        if (SaoCartelasIguais(cartelas[j], novaCartela))
+                        if (Verificarcartelas(cartelas[j], novaCartela))
                         {
                             cartelaUnica = false;
                             break;
@@ -60,7 +60,7 @@ namespace Trabalho_pratico
             }
             return false;
         }
-        private bool SaoCartelasIguais(Cartela cartela1, Cartela cartela2)
+        private bool Verificarcartelas(Cartela cartela1, Cartela cartela2)
         {
             for (int i = 0; i < 5; i++)
             {
