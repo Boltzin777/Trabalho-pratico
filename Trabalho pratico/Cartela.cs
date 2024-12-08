@@ -61,7 +61,42 @@ namespace Trabalho_pratico
                     numcartela[cont++] = cartelas[i, j];
                 }
             }
-        }       
+        }
+        public bool Verificarbingo()
+        {
+
+            for (int i = 0; i < 5; i++)
+            {
+                bool linhaCompleta = true;
+                for (int j = 0; j < 5; j++)
+                {
+                    if (cartelas[i, j] != 0)
+                    {
+                        linhaCompleta = false;
+                        break;
+                    }
+                }
+                if (linhaCompleta) return true;
+            }
+
+
+            for (int j = 0; j < 5; j++)
+            {
+                bool colunaCompleta = true;
+                for (int i = 0; i < 5; i++)
+                {
+                    if (cartelas[i, j] != 0)
+                    {
+                        colunaCompleta = false;
+                        break;
+                    }
+                }
+                if (colunaCompleta) return true;
+            }
+
+            return false;
+        }
+    
         public void ExibirCartela()
         {
             for (int i = 0; i < 5; i++)

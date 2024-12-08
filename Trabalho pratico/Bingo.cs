@@ -8,9 +8,14 @@ namespace Trabalho_pratico
 {
     internal class Bingo
     {
+        public Jogador[] jogadores;
         public int[] numsorteados = new int[75];
         private int indiceAtual = 0;
 
+        public Bingo(Jogador[] jogadores)
+        {
+            this.jogadores = jogadores;
+        }
         public int Realizarsorteio()
         {           
             Random random = new Random();
@@ -39,7 +44,21 @@ namespace Trabalho_pratico
 
             return numeroSorteado;
         }
+        public void VerificarBingo()
+        {
+            foreach (Jogador jogador in jogadores)
+            {
+                foreach (Cartela cartela in jogador.cartelas)
+                {
+                    if (cartela.Verificarbingo())
+                    {
+                        Console.WriteLine($"{jogador.nome} fez Bingo!");                        
+                    }
+                }
+            }
 
+            Console.WriteLine("Nenhum jogador fez Bingo.");
+        }
         public void ExibirNumerosSorteados()
         {
             Console.WriteLine("Números sorteados:");
@@ -47,43 +66,8 @@ namespace Trabalho_pratico
             {
                 Console.Write(numsorteados[i] + (i < indiceAtual - 1 ? ", " : "\n"));
             }
-        }
-        public bool Verificarbingo()
-        {
-            
-            for (int i = 0; i < 5; i++)
-            {
-                bool linhaCompleta = true;
-                for (int j = 0; j < 5; j++)
-                {
-                    if (cartelas[i, j] != 0)
-                    {
-                        linhaCompleta = false;
-                        break;
-                    }
-                }
-                if (linhaCompleta) return true;  
-            }
-
-            
-            for (int j = 0; j < 5; j++)
-            {
-                bool colunaCompleta = true;
-                for (int i = 0; i < 5; i++)
-                {
-                    if (cartelas[i, j] != 0)
-                    {
-                        colunaCompleta = false;
-                        break;
-                    }
-                }
-                if (colunaCompleta) return true;  
-            }
-
-            return false; 
-        }
+        }   
     }
-
 }
     
 
