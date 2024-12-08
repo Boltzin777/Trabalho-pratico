@@ -61,12 +61,7 @@ namespace Trabalho_pratico
                     numsorts[cont++] = cartelas[i, j];
                 }
             }
-        }
-        public bool Verificarcartelaunica()
-        {
-
-            return true;
-        }
+        }       
         public void ExibirCartela()
         {
             for (int i = 0; i < 5; i++)
@@ -78,8 +73,7 @@ namespace Trabalho_pratico
                 }
                 Console.WriteLine();
             }
-            for(int i = 0;i < 25; i++)
-            Console.Write(numsorts[i] + " ");
+
         }
 
     }
