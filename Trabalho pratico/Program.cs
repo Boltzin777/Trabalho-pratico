@@ -11,7 +11,10 @@ namespace Trabalho_pratico
     {
         static void Main(string[] args)
         {
-
+            Cartela cartela = new Cartela();
+            cartela.Prenchercartela();
+            cartela.ExibirCartela();
+            Console.ReadLine();
         }
     }
 }
