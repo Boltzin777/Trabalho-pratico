@@ -13,17 +13,11 @@ namespace Trabalho_pratico
         {
             
             Jogador jogador = new Jogador("Lucas", 4);           
-            jogador.ExibirInformacoes();          
-            Console.WriteLine("\nDigite um número para verificar nas cartelas:");
-            int numero = int.Parse(Console.ReadLine());
-            if (jogador.VerificaNumero(numero))
-            {
-                Console.WriteLine($"O número {numero} está presente nas cartelas do jogador {jogador.nome}.");
-            }
-            else
-            {
-                Console.WriteLine($"O número {numero} NÃO está presente nas cartelas do jogador {jogador.nome}.");
-            }
+            jogador.ExibirInformacoes();                     
+            Bingo bingo = new Bingo();
+            int num = bingo.Realizarsorteio();
+            
+            
             Console.ReadLine();
         }
     }

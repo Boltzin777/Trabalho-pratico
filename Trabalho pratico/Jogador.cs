@@ -43,7 +43,7 @@ namespace Trabalho_pratico
                 cartelas[i] = novaCartela; 
             }
         }
-        public bool VerificaNumero(int numero)
+        public void VerificaNumero(int numero)
         {
             foreach (Cartela cartela in cartelas)
             {
@@ -53,12 +53,12 @@ namespace Trabalho_pratico
                     {
                         if (cartela.cartelas[i, j] == numero)
                         {
-                            return true;
+                            cartela.cartelas[i, j] = 0;                           
                         }
                     }
                 }
             }
-            return false;
+            
         }
         private bool Verificarcartelas(Cartela cartela1, Cartela cartela2)
         {

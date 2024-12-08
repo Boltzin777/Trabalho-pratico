@@ -9,7 +9,7 @@ namespace Trabalho_pratico
     internal class Cartela
     {
         public int[,] cartelas = new int [5,5];
-        private int[] numsorts = new int[25];
+        private int[] numcartela = new int[25];
 
         public void Prenchercartela()
         {
@@ -58,7 +58,7 @@ namespace Trabalho_pratico
             {
                 for (int j = 0; j < cartelas.GetLength(1); j++)
                 {
-                    numsorts[cont++] = cartelas[i, j];
+                    numcartela[cont++] = cartelas[i, j];
                 }
             }
         }       
