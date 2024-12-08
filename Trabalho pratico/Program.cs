@@ -33,70 +33,102 @@ namespace Trabalho_pratico
 
             Bingo bingo = new Bingo(jogadores);
 
-            using (StreamWriter writer = new StreamWriter("log_jogo_bingo.txt", false))
+            
+            StreamWriter writer = new StreamWriter("log_jogo_bingo.txt", false);
+            writer.WriteLine("Início do jogo de Bingo");
+            writer.WriteLine($"Número de jogadores: {numJogadores}");
+            for (int i = 0; i < numJogadores; i++)
             {
-                writer.WriteLine("Início do jogo de Bingo");
-                writer.WriteLine($"Número de jogadores: {numJogadores}");
-                foreach (Jogador jogador in jogadores)
+                writer.WriteLine($"Jogador: {jogadores[i].nome}, Cartelas: {jogadores[i].cartelas.Length}");
+            }
+
+            bool jogoAtivo = true;
+            while (jogoAtivo)
+            {
+                for (int i = 0; i < numJogadores; i++)
                 {
-                    writer.WriteLine($"Jogador: {jogador.nome}, Cartelas: {jogador.cartelas.Length}");
+                    writer.WriteLine($"\nCartelas do jogador {jogadores[i].nome}:");
+                    jogadores[i].ExibirInformacoes(writer);
                 }
 
-                bool jogoAtivo = true;
-                while (jogoAtivo)
+                int numeroSorteado = bingo.Realizarsorteio();
+                writer.WriteLine($"\nNúmero sorteado: {numeroSorteado}");
+
+                for (int i = 0; i < numJogadores; i++)
                 {
-                    foreach (Jogador jogador in jogadores)
+                    jogadores[i].VerificaNumero(numeroSorteado);
+                }
+
+                bingo.VerificarBingo();
+
+                writer.WriteLine("\nDeseja sortear o próximo número? (s/n): ");
+                string resposta = Console.ReadLine().ToLower();
+                if (resposta != "s")
+                {
+                    jogoAtivo = false;
+                }
+
+                int countBingo = 0;
+                for (int i = 0; i < numJogadores; i++)
+                {
+                    for (int j = 0; j < jogadores[i].cartelas.Length; j++)
                     {
-                        writer.WriteLine($"\nCartelas do jogador {jogador.nome}:");
-                        jogador.ExibirInformacoes(writer);
-                    }
-
-                    int numeroSorteado = bingo.Realizarsorteio();
-                    writer.WriteLine($"\nNúmero sorteado: {numeroSorteado}");
-
-                    foreach (Jogador jogador in jogadores)
-                    {
-                        jogador.VerificaNumero(numeroSorteado);
-                    }
-
-                    bingo.VerificarBingo();
-
-                    writer.WriteLine("\nDeseja sortear o próximo número? (s/n): ");
-                    string resposta = Console.ReadLine().ToLower();
-                    if (resposta != "s")
-                    {
-                        jogoAtivo = false;
-                    }
-
-                    int countBingo = 0;
-                    foreach (Jogador jogador in jogadores)
-                    {
-                        foreach (Cartela cartela in jogador.cartelas)
+                        if (jogadores[i].cartelas[j].Verificarbingo())
                         {
-                            if (cartela.Verificarbingo())
-                            {
-                                countBingo++;
-                                break;
-                            }
+                            countBingo++;
+                            break;
+                        }
+                    }
+                }
+
+                if (countBingo == numJogadores - 1)
+                {
+                    jogoAtivo = false;
+                }
+            }
+
+            writer.WriteLine("\nO jogo terminou! Ranking dos jogadores:");           
+            for (int i = 0; i < numJogadores - 1; i++)
+            {
+                for (int j = i + 1; j < numJogadores; j++)
+                {
+                    bool bingoI = false;
+                    bool bingoJ = false;
+                   
+                    for (int k = 0; k < jogadores[i].cartelas.Length; k++)
+                    {
+                        if (jogadores[i].cartelas[k].Verificarbingo())
+                        {
+                            bingoI = true;
+                            break;
                         }
                     }
 
-                    if (countBingo == jogadores.Length - 1)
+                    for (int k = 0; k < jogadores[j].cartelas.Length; k++)
                     {
-                        jogoAtivo = false;
+                        if (jogadores[j].cartelas[k].Verificarbingo())
+                        {
+                            bingoJ = true;
+                            break;
+                        }
+                    }
+
+                    if (bingoI && !bingoJ)
+                    {
+                        Jogador temp = jogadores[i];
+                        jogadores[i] = jogadores[j];
+                        jogadores[j] = temp;
                     }
                 }
-
-                writer.WriteLine("\nO jogo terminou! Ranking dos jogadores:");
-                Array.Sort(jogadores, (x, y) => x.cartelas[0].Verificarbingo().CompareTo(y.cartelas[0].Verificarbingo()));
-
-                foreach (Jogador jogador in jogadores)
-                {
-                    jogador.ExibirInformacoes(writer);
-                }
-
-                writer.WriteLine("Fim do jogo.");
             }
+
+            for (int i = 0; i < numJogadores; i++)
+            {
+                jogadores[i].ExibirInformacoes(writer);
+            }
+
+            writer.WriteLine("Fim do jogo.");
+            writer.Close();
         }
     }
 }
