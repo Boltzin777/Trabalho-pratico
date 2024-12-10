@@ -33,7 +33,7 @@ namespace Trabalho_pratico
 
             Bingo bingo = new Bingo(jogadores);
 
-            
+         
             StreamWriter writer = new StreamWriter("log_jogo_bingo.txt", false);
             writer.WriteLine("Início do jogo de Bingo");
             writer.WriteLine($"Número de jogadores: {numJogadores}");
@@ -48,11 +48,13 @@ namespace Trabalho_pratico
                 for (int i = 0; i < numJogadores; i++)
                 {
                     writer.WriteLine($"\nCartelas do jogador {jogadores[i].nome}:");
-                    jogadores[i].ExibirInformacoes(writer);
+                    jogadores[i].ExibirInformacoesarq(writer);
+                    jogadores[i].ExibirInformacoes();
                 }
 
                 int numeroSorteado = bingo.Realizarsorteio();
                 writer.WriteLine($"\nNúmero sorteado: {numeroSorteado}");
+                Console.WriteLine($"\nNúmero sorteado: {numeroSorteado}");
 
                 for (int i = 0; i < numJogadores; i++)
                 {
@@ -62,10 +64,15 @@ namespace Trabalho_pratico
                 bingo.VerificarBingo();
 
                 writer.WriteLine("\nDeseja sortear o próximo número? (s/n): ");
+                Console.WriteLine("\nDeseja sortear o próximo número? (s/n): ");
                 string resposta = Console.ReadLine().ToLower();
                 if (resposta != "s")
                 {
+                    Console.WriteLine("Deseja encerar o jogo? (s/n)");
+                    resposta = Console.ReadLine().ToLower();
+                    if(resposta == "s")
                     jogoAtivo = false;
+
                 }
 
                 int countBingo = 0;
@@ -87,14 +94,16 @@ namespace Trabalho_pratico
                 }
             }
 
-            writer.WriteLine("\nO jogo terminou! Ranking dos jogadores:");           
+            writer.WriteLine("\nO jogo terminou! Ranking dos jogadores:");
+            
             for (int i = 0; i < numJogadores - 1; i++)
             {
                 for (int j = i + 1; j < numJogadores; j++)
                 {
                     bool bingoI = false;
                     bool bingoJ = false;
-                   
+
+                    
                     for (int k = 0; k < jogadores[i].cartelas.Length; k++)
                     {
                         if (jogadores[i].cartelas[k].Verificarbingo())
@@ -124,10 +133,12 @@ namespace Trabalho_pratico
 
             for (int i = 0; i < numJogadores; i++)
             {
-                jogadores[i].ExibirInformacoes(writer);
+                jogadores[i].ExibirInformacoesarq(writer);
+                jogadores[i].ExibirInformacoes();
             }
 
             writer.WriteLine("Fim do jogo.");
+            Console.WriteLine("Fim de jogo");
             writer.Close();
         }
     }

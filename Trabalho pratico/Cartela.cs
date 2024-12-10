@@ -97,8 +97,19 @@ namespace Trabalho_pratico
 
             return false;
         }
+        public void ExibirCartela()
+        {
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    Console.Write($"{cartelas[i, j],3} ");
+                }
+                Console.WriteLine();
+            }
+        }
 
-        public void ExibirCartela(StreamWriter writer)
+        public void ExibirCartelaarq(StreamWriter writer)
         {
             for (int i = 0; i < 5; i++)
             {

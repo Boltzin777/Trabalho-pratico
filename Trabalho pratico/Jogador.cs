@@ -75,14 +75,25 @@ namespace Trabalho_pratico
             }
             return true; 
         }
-       public void ExibirInformacoes(StreamWriter writer)
+        public void ExibirInformacoes()
+        {
+            Console.WriteLine($"Nome: {nome}");
+            Console.WriteLine("Cartelas do jogador:");
+            for (int i = 0; i < cartelas.Length; i++)
+            {
+                Console.WriteLine($"\nCartela {i + 1}:");
+                cartelas[i].ExibirCartela();
+            }
+        }
+
+        public void ExibirInformacoesarq(StreamWriter writer)
         {
             writer.WriteLine($"Nome: {nome}");
             writer.WriteLine("Cartelas do jogador:");
             for (int i = 0; i < cartelas.Length; i++)
             {
                 writer.WriteLine($"\nCartela {i + 1}:");
-                cartelas[i].ExibirCartela(writer);
+                cartelas[i].ExibirCartelaarq(writer);
             }
         }
 
